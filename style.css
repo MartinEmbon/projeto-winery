@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:lightblue
+}
+
+.accordion {
+    max-width: 800px;    
+}
+
+.accordion h1 {
+    text-align: center;
+}
+
+.accordion .contentBx {
+    position:relative;
+    margin: 10px 20px;
+    
+}
+
+.accordion .contentBx .label {
+    position:relative;
+    padding: 10px;
+    background:lightcoral;
+    color:white;
+    cursor: pointer;
+    width:100% ;
+}
+
+.accordion .contentBx .label p {
+    width: 90%;
+}
+
+.accordion .contentBx .label::before {
+    content: "+";
+    position:absolute;
+    top:50%;
+    right:20px;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+}
+
+.accordion .contentBx .content {
+    position:relative;    
+    background-color: white;
+    height: 0;    
+    overflow: hidden;
+    transition: .5s;
+    overflow-y: auto;
+    padding-left: 10px;
+}
+
+.accordion .contentBx.active .label::before {
+ content:"-"
+}
+
+.accordion .contentBx.active .content {
+    height:150px;
+    padding: 10px;
+}
