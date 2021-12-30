@@ -1,5 +1,5 @@
 import "./sidebar.css"
-
+import {Link} from "react-router-dom"
 import LineStyleOutlinedIcon from '@mui/icons-material/LineStyleOutlined';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
@@ -37,14 +37,18 @@ const Sidebar = () => {
                 <div className="sidebarMenu">
                     <h3 className="sidebarTitle">Quick Menu</h3>
                     <ul className="sidebarList">
+                        <Link to="/users" className="link">
                         <li className="sidebarListItem">
                             <PermIdentityOutlinedIcon className="sidebarIcon"/>
                             Users
                         </li>
+                        </Link>
+                        <Link to="/products" className="link">
                         <li className="sidebarListItem">
                             <StorefrontOutlinedIcon className="sidebarIcon"/>
                             Products
                         </li>
+                        </Link>
                         <li className="sidebarListItem">
                             <AttachMoneyOutlinedIcon className="sidebarIcon"/>
                             Transactions

@@ -1,8 +1,16 @@
+import {useState} from "react"
 import "./userList.css"
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import {userRows} from "../../dummyData"
+import {Link} from "react-router-dom"
 
 const UserList = () => {
+  const [data, setData]= useState(userRows)
+
+  const handleDelete = (id) => {
+    setData(data.filter(item=>item.id !== id))
+  }
     const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'user', headerName: 'User', width: 200, renderCell:(params)=>{
@@ -20,75 +28,23 @@ const UserList = () => {
     renderCell:(params)=>{
         return (
             <>
-            <button className="userListEdit">Edit</button>
-            <DeleteForeverOutlinedIcon className="userListDelete"/>
+            <Link to={"/user/"+params.row.id}>
+              <button className="userListEdit">Edit</button>
+            </Link>
+
+            <DeleteForeverOutlinedIcon className="userListDelete"
+            onClick={()=>handleDelete(params.row.id)}
+            />
             </>
         )
     }
 },
 ];
 
-const rows = [
-  { id: 1, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$120"
-    }, 
-  { id: 2, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$820"
-    }, 
-  { id: 3, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$320"
-    }, 
-  { id: 4, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$12020"
-    }, 
-  { id: 5, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$12020"
-    }, 
-  { id: 6, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$12020"
-    }, 
-  { id: 7, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$12020"
-    }, 
-  { id: 8, 
-    username: "Jon Snow",
-    avatar: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email:"jongmail.com",
-    status:"active",
-    transaction:"$12020"
-    }, 
-];
+
     return (
         <div className="userList"> 
-            <DataGrid rows={rows} disableSelectionOnClick columns={columns} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection />
+            <DataGrid rows={data} disableSelectionOnClick columns={columns} pageSize={5} rowsPerPageOptions={[5]} checkboxSelection />
         </div>
     )
 }
